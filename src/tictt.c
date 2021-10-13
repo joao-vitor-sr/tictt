@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <ctype.h>
+#include <stdlib.h>
 
 // headers 
 #include "tictt.h"
-
-char board[3][3];
 
 bool game_is_end()
 {
@@ -26,7 +26,7 @@ bool game_is_end()
 
 	// diagonal
 	if ((board[0][0] == board[1][1] &&
-			board[1][1] == board[2][2]) ||
+				board[1][1] == board[2][2]) ||
 			(board[0][2] == board[1][1] &&
 			 board[1][1] == board[2][0])) {
 		return true;
@@ -36,17 +36,42 @@ bool game_is_end()
 }
 
 
-char which_player_win()
-{
-	return 'X';
-}
-
 void display_board() 
 {
+	printf("\n   0 1 2 \n"); // column number
 	for (short indexLine = 0; indexLine < 3; indexLine++) {
+		printf("%c ", board_line_letters[indexLine]); // line letter
+
 		for (short indexSquare = 0; indexSquare < 3; indexSquare++) {
-			printf("|%c", board[indexLine][indexSquare]);
+			printf("|%c", (board[indexLine][indexSquare] != '\0' ? board[indexLine][indexSquare] : ' '));
 		}
-		printf("|\n");
+
+		printf("|\n"); // break line for each line
 	}
+}
+
+bool make_a_movement(char input[10], bool first_player) 
+{
+	char line_character = toupper(input[0]);
+	short line_index = return_character_index(line_character);
+	short column_number = atoi(&input[1]);
+
+	if (board[line_index][column_number] == '\0') {
+		board[line_index][column_number] = (first_player ? 'X' : 'O');
+		return true;
+	}
+
+	return false;
+
+}
+
+short return_character_index(char character) 
+{
+	for (short index = 0;index < 3; index++) {
+		if (board_line_letters[index] == character) {
+			return index;
+		}
+	}
+
+	return 2;
 }
