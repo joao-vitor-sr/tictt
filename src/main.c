@@ -1,6 +1,8 @@
-#include <stdio.h>
+// headers
+#include "tictt.h"
 
-int main() {
-	printf("Hello, World!!!");
+int main() 
+{
+	display_board(0);
 	return 1;
 }
