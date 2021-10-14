@@ -6,29 +6,56 @@
 // headers 
 #include "tictt.h"
 
+char board_line_letters[3] = {'A', 'B', 'C'};
+
 bool game_is_end()
 {
 	// line
 	for (short index_line = 0; index_line < 3; index_line++) {
 		if (board[index_line][0] == board[index_line][1] &&
-				board[index_line][1] == board[index_line][2]) {
+				board[index_line][1] == board[index_line][2] && board[index_line][2] != '\0') {
+
+			if (board[index_line][0] == 'X') {
+				winner_player = 2;
+			} else if (board[index_line][0] == 'O') {
+				winner_player = 1;
+			}
+
 			return true;
 		}
+
 	}
 
 	// column
 	for (short index_column = 0; index_column < 3; index_column++) {
 		if (board[0][index_column] == board[1][index_column] &&
-				board[1][index_column] == board[2][index_column]) {
+				board[1][index_column] == board[2][index_column] && board[2][index_column] != '\0') {
+
+
+			if (board[1][index_column] == 'X') {
+				winner_player = 2;
+			} else if (board[1][index_column] == 'O') {
+				winner_player = 1;
+			}
+
 			return true;
 		}
 	}
 
 	// diagonal
 	if ((board[0][0] == board[1][1] &&
-				board[1][1] == board[2][2]) ||
+				board[1][1] == board[2][2] && board[2][2] != '\0') ||
 			(board[0][2] == board[1][1] &&
-			 board[1][1] == board[2][0])) {
+			 board[1][1] == board[2][0] && board[2][0] != '\0' )) {
+
+
+		if (board[1][1] == 'X') {
+			winner_player = 2;
+		} else if (board[1][1] == 'O') {
+			winner_player = 1;
+		}
+
+
 		return true;
 	}
 
