@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include <ctype.h>
 #include <stdlib.h>
+#include <string.h>
 
 // headers 
 #include "tictt.h"
@@ -15,9 +16,9 @@ bool game_is_end()
 		if (board[index_line][0] == board[index_line][1] &&
 				board[index_line][1] == board[index_line][2] && board[index_line][2] != '\0') {
 
-			if (board[index_line][0] == 'X') {
+			if (board[index_line][0] == 'O') {
 				winner_player = 2;
-			} else if (board[index_line][0] == 'O') {
+			} else if (board[index_line][0] == 'X') {
 				winner_player = 1;
 			}
 
@@ -32,9 +33,9 @@ bool game_is_end()
 				board[1][index_column] == board[2][index_column] && board[2][index_column] != '\0') {
 
 
-			if (board[1][index_column] == 'X') {
+			if (board[1][index_column] == 'O') {
 				winner_player = 2;
-			} else if (board[1][index_column] == 'O') {
+			} else if (board[1][index_column] == 'X') {
 				winner_player = 1;
 			}
 
@@ -49,12 +50,11 @@ bool game_is_end()
 			 board[1][1] == board[2][0] && board[2][0] != '\0' )) {
 
 
-		if (board[1][1] == 'X') {
+		if (board[1][1] == 'O') {
 			winner_player = 2;
-		} else if (board[1][1] == 'O') {
+		} else if (board[1][1] == 'X') {
 			winner_player = 1;
 		}
-
 
 		return true;
 	}
@@ -102,3 +102,6 @@ short return_character_index(char character)
 
 	return 2;
 }
+
+
+
