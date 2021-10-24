@@ -62,6 +62,18 @@ bool game_is_end()
 	return false;
 }
 
+bool game_is_tie() 
+{
+	for (short index_line = 0; index_line < 3; index_line++) {
+		for (short index_column = 0; index_column < 3; index_column++) {
+			if (board[index_line][index_column] == '\0') {
+				return false;
+				break;
+			}
+		}
+	}
+	return true;
+}
 
 void display_board() 
 {
