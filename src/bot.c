@@ -287,7 +287,7 @@ bool bot_defense()
 			still_is_searching_right_to_left = false;
 			break;
 		} else if (board[line_index][column_index] == 'X') {
-			invalid_diagonal_squares_left++;
+			invalid_diagonal_squares_right++;
 		}
 
 
@@ -300,7 +300,7 @@ bool bot_defense()
 	}
 
 
-	if (!diagonal_left_to_right_is_safe && invalid_diagonal_squares_left == 2) {
+	if (!diagonal_left_to_right_is_safe && invalid_diagonal_squares_right == 2) {
 		unsigned short line_index = 0;
 		unsigned short column_index = 0;
 		bool diagonal_left_to_right_is_safe = false;
