@@ -6,3 +6,4 @@ char *name_of_second_player;
 int main();
 bool player_is_playing_alone();
 void get_player_configuration();
+void make_bot_movement();

@@ -3,6 +3,7 @@
 
 // headers
 #include "tictt.h"
+#include "bot.h"
 #include "main.h"
 
 int main() 
@@ -12,8 +13,27 @@ int main()
 	bool game_is_running = true;
 	bool current_player_is_main = true; // true first, false player
 
-
 	while (game_is_running) {
+		// validating if game is end
+		if (game_is_end() == true) {
+
+			if (player_is_alone) {
+				display_board();
+			}
+
+			if (winner_player == 1) {
+				printf("Congratulations %s", name_of_first_player);	
+				break;
+			} else {
+				printf("Congratulations %s", name_of_second_player);	
+				break;
+			}
+
+		} else if (game_is_tie()) {
+			printf("TIE");
+			break;
+		}
+
 		printf("\nPlayer: %s", 
 				(current_player_is_main == true ? name_of_first_player : name_of_second_player));
 		display_board();
@@ -26,21 +46,10 @@ int main()
 			make_a_movement(line_next_move, current_player_is_main);
 		}
 
-		// validating if game is end
-		if (game_is_end() == true) {
-
-			if (winner_player == 1) {
-				printf("Congratulations %s", name_of_first_player);	
-				break;
-			} else {
-				printf("Congratulations %s", name_of_second_player);	
-				break;
-
-			}
-		}
-
 		if (!player_is_alone) {
 			current_player_is_main = (current_player_is_main ? false : true);
+		} else {
+			make_bot_attack();
 		}
 
 	}
