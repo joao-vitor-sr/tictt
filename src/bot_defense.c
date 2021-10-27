@@ -15,11 +15,11 @@ bool defense_diagonal_right_to_left()
 	unsigned short invalid_diagonal_squares_right = 0;
 	bool diagonal_right_to_left_is_safe = false;
 	while (still_is_searching_right_to_left) {
-		if (board[line_index][column_index] == 'O') {
+		if (board[line_index][column_index] == second_player_character) {
 			diagonal_right_to_left_is_safe = true;
 			still_is_searching_right_to_left = false;
 			break;
-		} else if (board[line_index][column_index] == 'X') {
+		} else if (board[line_index][column_index] == first_player_character) {
 			invalid_diagonal_squares_right++;
 		}
 
@@ -40,7 +40,7 @@ bool defense_diagonal_right_to_left()
 		bool still_is_searching_left_to_right = true;
 		while (still_is_searching_left_to_right) {
 			if (board[line_index][column_index] == '\0') {
-				board[line_index][column_index] = 'O';
+				board[line_index][column_index] = second_player_character;
 				still_is_searching_left_to_right = false;
 				return true;
 			}
@@ -70,11 +70,11 @@ bool defense_diagonal_left_to_right()
 	unsigned short invalid_diagonal_squares_left = 0;
 	bool diagonal_left_to_right_is_safe = false;
 	while (still_is_searching_left_to_right) {
-		if (board[line_index][column_index] == 'O') {
+		if (board[line_index][column_index] == second_player_character) {
 			diagonal_left_to_right_is_safe = true;
 			still_is_searching_left_to_right = false;
 			break;
-		} else if (board[line_index][column_index] == 'X') {
+		} else if (board[line_index][column_index] == first_player_character) {
 			invalid_diagonal_squares_left++;
 		}
 
@@ -95,7 +95,7 @@ bool defense_diagonal_left_to_right()
 		bool still_is_searching_left_to_right = true;
 		while (still_is_searching_left_to_right) {
 			if (board[line_index][column_index] == '\0') {
-				board[line_index][column_index] = 'O';
+				board[line_index][column_index] = second_player_character;
 				still_is_searching_left_to_right = false;
 				return true;
 			}
@@ -120,7 +120,7 @@ bool defense_column(short index)
 	char column_array[3];
 	for (short index_line = 0; index_line < 3; index_line++) {
 		column_array[index_line] = board[index_line][index];
-		if (board[index_line][index] == 'O') {
+		if (board[index_line][index] == second_player_character) {
 			column_is_safe = true;
 		}
 	}
@@ -132,15 +132,15 @@ bool defense_column(short index)
 	// validating if the player is close to complete the line
 	short quantity_of_invalid_squares_column = 0;
 	for (short index_line = 0; index_line < 3; index_line++) {
-		if (board[index_line][index] == 'X') {
+		if (board[index_line][index] == first_player_character) {
 			quantity_of_invalid_squares_column++;
 		}
 	}
 
 	if (!column_is_safe && quantity_of_invalid_squares_column == 2) {
 		for (short index_line = 0; index_line < 3; index_line++) {
-			if (board[index_line][index] != 'X') {
-				board[index_line][index] = 'O';
+			if (board[index_line][index] != first_player_character) {
+				board[index_line][index] = second_player_character;
 				return true;
 				break;
 			}
@@ -156,7 +156,7 @@ bool defense_line(short index)
 	// line
 	bool line_is_safe = false;
 	for (short index_column = 0; index_column < 3; index_column++) {
-		if (board[index][index_column] == 'O') {
+		if (board[index][index_column] == second_player_character) {
 			line_is_safe = true;
 		}
 	}
@@ -168,15 +168,15 @@ bool defense_line(short index)
 	// validating if the player is close to complete the line
 	short quantity_of_invalid_squares = 0;
 	for (short index_column = 0; index_column < 3; index_column++) {
-		if (board[index][index_column] == 'X') {
+		if (board[index][index_column] == first_player_character) {
 			quantity_of_invalid_squares++;
 		}
 	}
 
 	if (!line_is_safe && quantity_of_invalid_squares == 2) {
 		for (short index_column = 0; index_column < 3; index_column++) {
-			if (board[index][index_column] != 'X') {
-				board[index][index_column] = 'O';
+			if (board[index][index_column] != first_player_character) {
+				board[index][index_column] = second_player_character;
 				return true;
 				break;
 			}

@@ -7,3 +7,6 @@ bool make_a_movement(char input[3], bool first_player);
 short return_character_index(char character);
 
 short winner_player; // 1 - main, 2 - secondary;
+
+static char first_player_character = 'X';
+static char second_player_character = 'O';
