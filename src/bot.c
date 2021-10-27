@@ -8,16 +8,12 @@
 #include "bot_defense.h"
 #include "bot_attack.h"
 
-short return_random_number(short lower, short upper, short count) 
+short return_random_number(short lower, short upper) 
 {
 	srand(time(0));
 
-	for (short index = 0; index < count; index++) {
-		int num = (rand() % (upper - lower + 1)) + lower;
-		return num;
-	}
-
-	return upper;
+	short num = (rand() % (upper - lower + 1)) + lower;
+	return num;
 }
 
 bool unique_element(char array[], short array_index, char char_to_compare)
