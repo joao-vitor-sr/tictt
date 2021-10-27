@@ -1,10 +1,24 @@
 #include <stdbool.h>
 #include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
 
 #include "bot.h"
 #include "tictt.h"
 #include "bot_defense.h"
 #include "bot_attack.h"
+
+short return_random_number(short lower, short upper, short count) 
+{
+	srand(time(0));
+
+	for (short index = 0; index < count; index++) {
+		int num = (rand() % (upper - lower + 1)) + lower;
+		return num;
+	}
+
+	return upper;
+}
 
 bool unique_element(char array[], short array_index, char char_to_compare)
 {
