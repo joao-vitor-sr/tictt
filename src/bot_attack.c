@@ -3,46 +3,57 @@
 #include "tictt.h"
 #include "bot.h"
 
+bool validate_line_attack(short index_line)
+{
+
+	for (short index_column = 0; index_column < 3; index_column++) {
+		if (board[index_line][index_column] == first_player_character) {
+			return false;
+		}
+
+	}
+
+	return true;
+}
+
+short get_line_empty_column(short index_line)
+{
+
+		// get the last empty square
+		for (short index_column = 0; index_column < 3; index_column++) {
+			if (board[index_line][index_column] == '\0') {
+				return index_column;
+			}
+		}
+
+		return 3; // return a invalid index when no column was found
+}
+
 bool bot_line_attack()
 {
 	// line
 	for (short index_line = 0; index_line < 3; index_line++) {
 
-		bool line_is_invalid = false;
-		// validating if at line exist some charater of the player
-		for (short index_column = 0; index_column < 3; index_column++) {
-			if (board[index_line][index_column] == first_player_character) {
-				line_is_invalid = true;
-				break;
-			}
-
-		}
-
-		if (line_is_invalid) {
-			line_is_invalid = false;
+		if (!validate_line_attack(index_line)) {
 			continue;
 		}
 
-
 		if (unique_element(board[index_line], 3, '\0')) {
-			board[index_line][return_random_number(1, 3, 3)] = second_player_character;
+			board[index_line][return_random_number(0, 2)] = second_player_character;
 			return true;
 		}
 
 
 		// get the last empty square
-		for (short index_column = 0; index_column < 3; index_column++) {
-			if (board[index_line][index_column] == '\0') {
-				board[index_line][index_column] = second_player_character;
-				return true;
-				break;
-			}
+		short empty_square = get_line_empty_column(index_line);
+
+		if (empty_square < 3) {
+			board[index_line][empty_square] = second_player_character;
+			return true;
 		}
-		break;
 	}
 
 	return false;
-
 }
 
 bool bot_column_attack()
@@ -71,7 +82,7 @@ bool bot_column_attack()
 		}
 
 		if (unique_element(column_array, 3, '\0')) {
-			board[return_random_number(1, 3, 3)][index_column] = second_player_character;
+			board[return_random_number(0, 2)][index_column] = second_player_character;
 			return true;
 		}
 
