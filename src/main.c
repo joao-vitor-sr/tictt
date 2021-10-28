@@ -72,7 +72,7 @@ void get_player_configuration()
 	if (!player_is_playing_alone()) { 
 		player_is_alone = false;
 
-		printf("What is the second player name? ");
+		printf("What is the second player's name? ");
 		char line_second_player[253];
 
 		if (fgets(line_second_player, sizeof(line_second_player), stdin) != NULL) {
